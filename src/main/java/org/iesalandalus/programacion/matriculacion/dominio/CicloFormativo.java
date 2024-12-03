@@ -23,7 +23,7 @@ public class CicloFormativo {
     public CicloFormativo(CicloFormativo otro) {
         this(otro.codigo, otro.familiaProfesional, otro.grado, otro.nombre, otro.horas);
         }
-    public int getCodigo(){
+    public String getCodigo(){
         return codigo;
     }
     public void setCodigo(String codigo) {
