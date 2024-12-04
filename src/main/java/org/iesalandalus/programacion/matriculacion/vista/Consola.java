@@ -86,7 +86,7 @@ public class Consola {
         return new CicloFormativo(codigo, nombre);
     }
 
-    public static void mostrarCiclosFormativos(List<CicloFormativo> ciclos) {
+    public static void mostrarCiclosFormativos() {
         System.out.println("Ciclos formativos registrados:");
         for (CicloFormativo ciclo : ciclos) {
             System.out.println(ciclo);
@@ -162,5 +162,23 @@ public class Consola {
         System.out.print("Introduce el identificador de la matrícula: ");
         int id = Integer.parseInt(entrada.nextLine());
         return new Matricula(id);
+    }
+
+    public static Asignatura getAsignaturaPorCodigo() {
+        try {
+            // Solicitar el código de la asignatura al usuario
+            System.out.print("Introduce el código de la asignatura: ");
+            String codigo = entrada.nextLine().trim();
+
+            // Validar el formato del código (si aplica alguna regla)
+            if (codigo.isEmpty()) {
+                throw new IllegalArgumentException("El código de la asignatura no puede estar vacío.");
+            }
+
+            return new Asignatura(codigo, "nombre", 100,);
+        } catch (Exception e) {
+            System.out.println("Error al obtener la asignatura por código: " + e.getMessage());
+            return null;
+        }
     }
 }
