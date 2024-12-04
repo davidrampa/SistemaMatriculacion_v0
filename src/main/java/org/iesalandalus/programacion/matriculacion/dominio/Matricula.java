@@ -135,4 +135,12 @@ public class Matricula {
         return String.format("Matricula [id=%d, cursoAcademico=%s, fechaMatricula=%s, fechaAnulacion=%s, asignaturas=%s]",
                 id, cursoAcademico, fechaMatricula, fechaAnulacion, asignaturasMatricula());
     }
+
+    public Object getAlumno() {
+        return null;
+    }
+
+    public Object getCicloFormativo() {
+        return null;
+    }
 }
