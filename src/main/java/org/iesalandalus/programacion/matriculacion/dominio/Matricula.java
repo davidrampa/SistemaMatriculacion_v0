@@ -13,6 +13,7 @@ public class Matricula {
     public static final int MAX_DIAS_RETRASO = 15;
     public static final int MAX_MESES_ANULACION = 6;
     public static final String FORMATO_CURSO_ACADEMICO = "\\D{2}-\\d{2}";
+    private final Alumno alumno;
 
     //Atributos
     private int id;
@@ -22,16 +23,34 @@ public class Matricula {
     private List<Asignatura> asignaturas;
 
     //Constructores
-    public Matricula(int id, String cursoAcademico, LocalDate fechaMatricula, List<Asignatura> asignaturas) {
-        setId(id);
+    public Matricula(int id, String cursoAcademico, LocalDate fechaMatricula, List<Asignatura> asignaturas, Alumno alumno) {
+        this.alumno = alumno;
+        this.fechaMatricula = fechaMatricula;
         setCursoAcademico(cursoAcademico);
         setFechaMatricula(fechaMatricula);
-        setAsignaturas(asignaturas);
+        this.asignaturas = new ArrayList<>(asignaturas);
+        this.id = id;
     }
 
-    public Matricula(Matricula otra) {
-        this(otra.id, otra.cursoAcademico, otra.fechaMatricula, new ArrayList<>(otra.asignaturas));
+    public Matricula(Alumno alumno, Matricula otra) {
+        this(otra.id, otra.cursoAcademico, otra.fechaMatricula, new ArrayList<>(otra.asignaturas), alumno);
         this.fechaAnulacion = otra.fechaAnulacion;
+    }
+
+    public Matricula(int id) {
+        this.id = id; // Asigna el identificador proporcionado
+        this.alumno = new Alumno("Nombre Ficticio", "Apellido Ficticio", "12345678Z"); // Alumno ficticio
+        this.fechaMatricula = LocalDate.now(); // Fecha ficticia actual
+        this.asignaturas = new ArrayList<>(); // Sin asignaturas
+    }
+
+    public Matricula(Alumno alumno, LocalDate fechaMatricula, List<Asignatura> asignaturas, Alumno alumno1) {
+
+        this.alumno = alumno1;
+    }
+
+    public Matricula(Alumno alumno, LocalDate fechaMatricula, List<Asignatura> asignaturas) {
+
     }
 
     //Metodos de acceso y modificacion

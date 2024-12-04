@@ -82,7 +82,7 @@ public class Matriculas {
     private List<Matricula> copiaProfundaMatriculas() {
         List<Matricula> copia = new ArrayList<>();
         for (Matricula matricula : listaMatriculas) {
-            copia.add(new Matricula(matricula));
+            copia.add(new Matricula(matricula.getId()));
         }
         return copia;
     }

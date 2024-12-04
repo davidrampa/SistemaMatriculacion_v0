@@ -37,6 +37,10 @@ public class Alumno {
         this(otro.nombre, otro.telefono, otro.email, otro.dni, otro.fechaNacimiento);
     }
 
+    public Alumno(String nombreFicticio, String apellidoFicticio, String dni) {
+
+    }
+
     // Métodos de acceso y modificación
     public String getNombre() {
         return nombre;

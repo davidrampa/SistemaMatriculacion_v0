@@ -34,6 +34,10 @@ public class Asignatura {
                 otra.curso, otra.especialidad, otra.cicloFormativo);
     }
 
+    public Asignatura(String codigo, String nombre) {
+
+    }
+
     // Métodos de acceso y modificación
 
     public String getCodigo() {
