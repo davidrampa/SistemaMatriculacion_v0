@@ -1,6 +1,6 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.List;
 public class Alumnos {
     //Atributos
     private List<Alumno> alumnos;
+    int listaAlumno;
     private int capacidad;
 
     //Constructor
@@ -21,8 +22,8 @@ public class Alumnos {
 
     //Metodos
 
-    public List<Alumno> get() {
-        return copiaProfundaAlumnos(alumnos);
+    public List<Alumno> getLista() {
+        return new ArrayList<>(listaAlumno);
     }
 
     private List<Alumno> copiaProfundaAlumnos(List<Alumno> original) {
@@ -46,12 +47,13 @@ public class Alumnos {
         alumnos.add(alumno);
     }
 
-    public Alumno buscar(Alumno alumno) {
+    public Alumno buscar(String alumno) {
         int index = alumnos.indexOf(alumno);
         return (index != -1) ? alumnos.get(index) : null;
     }
 
-    public boolean borrar(Alumno alumno) {
+
+    public boolean borrar(String alumno) {
         return alumnos.remove(alumno);
     }
 

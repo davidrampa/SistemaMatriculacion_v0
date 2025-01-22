@@ -1,6 +1,7 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,10 +19,9 @@ public class Asignaturas {
         listaAsignaturas = new ArrayList<>(capacidad);
     }
 
-    public List<Asignatura> get() {
-        return copiaProfundaAsignaturas();
+    public List<Asignatura> getLista() {
+        return new ArrayList<>(listaAsignaturas);
     }
-
     public void insertar(Asignatura asignatura) {
         if (asignatura == null) {
             throw new NullPointerException("La asignatura no puede ser nula.");
@@ -32,12 +32,12 @@ public class Asignaturas {
         listaAsignaturas.add(asignatura);
     }
 
-    public Asignatura buscar(Asignatura asignatura) {
+    public Asignatura buscar(String asignatura) {
         int indice = listaAsignaturas.indexOf(asignatura);
         return (indice != -1) ? listaAsignaturas.get(indice) : null;
     }
 
-    public void borrar(Asignatura asignatura) {
+    public void borrar(String asignatura) {
         if (asignatura == null) {
             throw new NullPointerException("La asignatura no puede ser nula.");
         }

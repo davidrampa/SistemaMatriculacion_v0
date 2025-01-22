@@ -1,8 +1,9 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,8 @@ public class Matriculas {
         this.listaMatriculas = new ArrayList<>(capacidad);
     }
 
-    public List<Matricula> get() {
-        return copiaProfundaMatriculas();
+    public List<Matricula> getLista() {
+        return new ArrayList<>(listaMatriculas);
     }
 
     public List<Matricula> get(Alumno alumno) {
@@ -65,12 +66,12 @@ public class Matriculas {
         listaMatriculas.add(matricula);
     }
 
-    public Matricula buscar(Matricula matricula) {
+    public Matricula buscar(String matricula) {
         int index = listaMatriculas.indexOf(matricula);
         return (index != -1) ? listaMatriculas.get(index) : null;
     }
 
-    public void borrar(Matricula matricula) {
+    public void borrar(String matricula) {
         if (matricula == null) {
             throw new NullPointerException("La matrícula no puede ser nula.");
         }

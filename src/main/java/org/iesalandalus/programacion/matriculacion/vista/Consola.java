@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.vista;
 
 import org.iesalandalus.programacion.matriculacion.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ public class CiclosFormativos {
     // Atributos
     private List<CicloFormativo> ciclosFormativos;
     private int capacidad;
+    int listaCicloFormativo;
 
     // Constructor
     public CiclosFormativos(int capacidad) {
@@ -20,8 +21,8 @@ public class CiclosFormativos {
     }
 
     // Métodos
-    public List<CicloFormativo> get() {
-        return copiaProfundaCiclosFormativos(ciclosFormativos);
+    public List<CicloFormativo> getLista() {
+        return new ArrayList<>(listaCicloFormativo);
     }
 
 
@@ -49,13 +50,13 @@ public class CiclosFormativos {
     }
 
 
-    public CicloFormativo buscar(CicloFormativo ciclo) {
+    public CicloFormativo buscar(String ciclo) {
         int index = ciclosFormativos.indexOf(ciclo);
         return (index != -1) ? ciclosFormativos.get(index) : null;
     }
 
 
-    public boolean borrar(CicloFormativo ciclo) {
+    public boolean borrar(String ciclo) {
         return ciclosFormativos.remove(ciclo);
     }
 
