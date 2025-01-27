@@ -99,4 +99,5 @@ public class Modelo {
     public List<Matricula> getMatriculas() {
         return new ArrayList<>(matriculas.getLista());
     }
+
 }

@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.vista;
 
-import org.iesalandalus.programacion.matriculacion.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class Consola {
         return new CicloFormativo(codigo, nombre);
     }
 
-    public static void mostrarCiclosFormativos() {
+    public static void mostrarCiclosFormativos(CicloFormativo[] ciclos) {
         System.out.println("Ciclos formativos registrados:");
         for (CicloFormativo ciclo : ciclos) {
             System.out.println(ciclo);
@@ -128,35 +127,39 @@ public class Consola {
         return listaAsignaturas.contains(asignatura);
     }
 
-    public static Matricula leerMatricula() {
-        try {
-            // Leer datos básicos para la matrícula.
-            System.out.println("Introduce los datos para la matrícula:");
-            Alumno alumno = leerAlumno(); // Llama al método leerAlumno para pedir los datos del alumno.
-            LocalDate fechaMatricula = leerFecha(); // Llama al método leerFecha para obtener la fecha.
+    public static Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturasDisponibles) {
+        List<Asignatura> asignaturasElegidas = new ArrayList<>();
+        boolean continuar;
+        do {
+            mostrarAsignaturas(asignaturasDisponibles);
+            System.out.print("Introduce el código de la asignatura a elegir: ");
+            String codigo = entrada.nextLine();
 
-            // Crear una lista de asignaturas para la matrícula.
-            List<Asignatura> asignaturas = new ArrayList<>();
-            boolean continuar;
-            do {
-                Asignatura asignatura = leerAsignatura(); // Pide los datos de una asignatura.
-                if (asignaturaYaMatriculada(asignaturas, asignatura)) {
-                    System.out.println("La asignatura ya está matriculada. No se añadirá.");
-                } else {
-                    asignaturas.add(asignatura);
-                    System.out.println("Asignatura añadida.");
+            Asignatura asignaturaElegida = null;
+            for (Asignatura asignatura : asignaturasDisponibles) {
+                if (asignatura.getCodigo().equals(codigo)) {
+                    asignaturaElegida = asignatura;
+                    break;
                 }
+            }
 
-                System.out.print("¿Deseas añadir otra asignatura? (s/n): ");
-                continuar = entrada.nextLine().equalsIgnoreCase("s");
-            } while (continuar);
+            if (asignaturaElegida != null && !asignaturasElegidas.contains(asignaturaElegida)) {
+                asignaturasElegidas.add(asignaturaElegida);
+                System.out.println("Asignatura añadida.");
+            } else {
+                System.out.println("Asignatura no válida o ya seleccionada.");
+            }
 
-            // Crear y devolver la matrícula.
-            return new Matricula(alumno, fechaMatricula, asignaturas);
-        } catch (Exception e) {
-            System.out.println("Ha ocurrido un error al crear la matrícula: " + e.getMessage());
-            return null; // En caso de error, devuelve null.
-        }
+            System.out.print("¿Deseas añadir otra asignatura? (s/n): ");
+            continuar = entrada.nextLine().equalsIgnoreCase("s");
+        } while (continuar);
+
+        return asignaturasElegidas.toArray(new Asignatura[0]);
+    }
+
+    public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturasElegidas) {
+        LocalDate fechaMatricula = leerFecha();
+        return new Matricula(alumno, fechaMatricula, List.of((Asignatura) asignaturasElegidas));
     }
 
     public static Matricula getMatriculaPorIdentificador() {
@@ -176,10 +179,13 @@ public class Consola {
                 throw new IllegalArgumentException("El código de la asignatura no puede estar vacío.");
             }
 
-            return new Asignatura(codigo, "nombre", 100,);
+            return new Asignatura(codigo, "nombre");
         } catch (Exception e) {
             System.out.println("Error al obtener la asignatura por código: " + e.getMessage());
             return null;
         }
+    }
+
+    public static void mostrarAlumnos(List<Alumno> alumnos) {
     }
 }

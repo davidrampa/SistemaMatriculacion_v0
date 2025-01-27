@@ -22,7 +22,8 @@ public enum Opcion {
     BUSCAR_CICLOS_FORMATIVOS("Buscar ciclos formativos"),
     MOSTRAR_MATRICULAS_ALUMNO("Mostrar las matriculas de un alumno"),
     MOSTRAR_MATRICULAS_CICLO("Mostrar las matriculas de un ciclo"),
-    MOSTRAR_MATRICULAS_CURSO("Mostrar las matriculas de un curso");
+    MOSTRAR_MATRICULAS_CURSO("Mostrar las matriculas de un curso"),
+    INSERTAR_MATRICULA("Inserte su matricula");
 
     private final String mensaje;
 
