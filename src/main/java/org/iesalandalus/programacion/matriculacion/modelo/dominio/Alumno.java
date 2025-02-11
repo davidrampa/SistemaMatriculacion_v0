@@ -167,4 +167,8 @@ public class Alumno {
         return String.format("Alumno[nombre=%s, telefono=%s, email=%s, dni=%s, fechaNacimiento=%s, nia=%s]",
                 nombre, telefono, email, dni, fechaNacimiento.format(formatter), nia);
     }
+
+    public ScopedValue<Object> map(Object o) {
+        return null;
+    }
 }

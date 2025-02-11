@@ -146,4 +146,8 @@ public class Asignatura {
     public String imprimir() {
         return String.format("%s - %s (%s)", codigo, nombre, curso);
     }
+
+    public ScopedValue<Object> map(Object o) {
+        return null;
+    }
 }

@@ -155,4 +155,8 @@ public class Matricula {
     public Object getCicloFormativo() {
         return null;
     }
+
+    public ScopedValue<Object> map(Object o) {
+        return null;
+    }
 }

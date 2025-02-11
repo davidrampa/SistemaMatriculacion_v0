@@ -11,7 +11,7 @@ public class Matriculas {
     private List<Matricula> listaMatriculas;
 
     // Constructor sin capacidad fija
-    public Matriculas(int tamanoMaximo) {
+    public Matriculas() {
         this.listaMatriculas = new ArrayList<>();
     }
 

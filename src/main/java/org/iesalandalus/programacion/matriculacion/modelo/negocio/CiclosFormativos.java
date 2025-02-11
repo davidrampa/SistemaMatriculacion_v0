@@ -9,7 +9,7 @@ public class CiclosFormativos {
     private final List<CicloFormativo> ciclosFormativos;
 
     // Constructor sin capacidad fija
-    public CiclosFormativos(int tamanoMaximo) {
+    public CiclosFormativos() {
         this.ciclosFormativos = new ArrayList<>();
     }
 

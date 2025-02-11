@@ -109,4 +109,8 @@ public class CicloFormativo {
     public String imprimir() {
         return String.format("%s - %s (%s)", codigo, nombre, grado);
     }
+
+    public ScopedValue<Object> map(Object o) {
+        return null;
+    }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class Asignaturas {
     private List<Asignatura> listaAsignaturas;
 
-    public Asignaturas(int tamanoMaximo) {
+    public Asignaturas() {
         listaAsignaturas = new ArrayList<>();
     }
 

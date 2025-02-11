@@ -3,13 +3,14 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Alumnos {
     // Atributo
     private List<Alumno> alumnos;
 
     // Constructor
-    public Alumnos(int tamanoMaximo) {
+    public Alumnos() {
         this.alumnos = new ArrayList<>();
     }
 
@@ -54,5 +55,9 @@ public class Alumnos {
             sb.append(alumno).append("\n");
         }
         return sb.toString().trim();
+    }
+
+    public Optional<Object> stream() {
+        return null;
     }
 }
