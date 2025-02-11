@@ -62,7 +62,7 @@ public class Modelo {
     }
 
     public Matricula buscarMatricula(String id) {
-        Matricula encontrada = matriculas.buscar(id);
+        Matricula encontrada = matriculas.buscar(Integer.parseInt(id));
         return (encontrada != null) ? new Matricula(encontrada.getId()) : null;
     }
 
@@ -80,7 +80,7 @@ public class Modelo {
     }
 
     public void borrarMatricula(String id) {
-        matriculas.borrar(id);
+        matriculas.borrar(Integer.parseInt(id));
     }
 
     //Metodos get

@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 public class Asignaturas {
     private List<Asignatura> listaAsignaturas;
 
-    public Asignaturas() {
+    public Asignaturas(int tamanoMaximo) {
         listaAsignaturas = new ArrayList<>();
     }
 
