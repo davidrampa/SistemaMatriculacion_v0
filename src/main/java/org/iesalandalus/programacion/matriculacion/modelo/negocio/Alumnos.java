@@ -1,37 +1,22 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Alumnos {
-    //Atributos
+    // Atributo
     private List<Alumno> alumnos;
-    int listaAlumno;
-    private int capacidad;
 
-    //Constructor
-    public Alumnos(int capacidad) {
-        if (capacidad <= 0) {
-            throw new IllegalArgumentException("La capacidad debe ser mayor que 0.");
-        }
-        this.capacidad = capacidad;
-        this.alumnos = new ArrayList<>(capacidad);
+    // Constructor
+    public Alumnos(int tamanoMaximo) {
+        this.alumnos = new ArrayList<>();
     }
 
-    //Metodos
+    // Métodos
 
     public List<Alumno> getLista() {
-        return new ArrayList<>(listaAlumno);
-    }
-
-    private List<Alumno> copiaProfundaAlumnos(List<Alumno> original) {
-        List<Alumno> copia = new ArrayList<>(original.size());
-        for (Alumno alumno : original) {
-            copia.add(new Alumno(alumno));
-        }
-        return copia;
+        return new ArrayList<>(alumnos); // Copia segura de la lista
     }
 
     public void insertar(Alumno alumno) {
@@ -39,22 +24,23 @@ public class Alumnos {
             throw new IllegalArgumentException("El alumno no puede ser nulo.");
         }
         if (alumnos.contains(alumno)) {
-            throw new IllegalArgumentException("El alumno ya esta en la coleccion.");
-        }
-        if (alumnos.size() >= capacidad) {
-            throw new IllegalArgumentException("No se pueden insertar mas alumnos, la capacidad maxima esta completa.");
+            throw new IllegalArgumentException("El alumno ya está en la colección.");
         }
         alumnos.add(alumno);
     }
 
-    public Alumno buscar(String alumno) {
-        int index = alumnos.indexOf(alumno);
-        return (index != -1) ? alumnos.get(index) : null;
+    public Alumno buscar(String nombreAlumno) {
+        for (Alumno alumno : alumnos) {
+            if (alumno.getNombre().equalsIgnoreCase(nombreAlumno)) {
+                return alumno;
+            }
+        }
+        return null; // Si no se encuentra
     }
 
-
-    public boolean borrar(String alumno) {
-        return alumnos.remove(alumno);
+    public boolean borrar(String nombreAlumno) {
+        Alumno alumno = buscar(nombreAlumno);
+        return alumno != null && alumnos.remove(alumno);
     }
 
     public int getTamano() {
@@ -63,9 +49,9 @@ public class Alumnos {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Lista de alumnos: \n");
+        StringBuilder sb = new StringBuilder("Lista de alumnos:\n");
         for (Alumno alumno : alumnos) {
-            sb.append(alumno.toString()).append("\n");
+            sb.append(alumno).append("\n");
         }
         return sb.toString().trim();
     }

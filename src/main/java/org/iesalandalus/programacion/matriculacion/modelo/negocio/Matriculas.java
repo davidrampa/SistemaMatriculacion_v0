@@ -1,32 +1,22 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Matriculas {
-
     private List<Matricula> listaMatriculas;
 
-    /**
-     * Constructor con capacidad inicial.
-     *
-     * @param capacidad Capacidad inicial de la lista de matrículas.
-     */
-    public Matriculas(int capacidad) {
-        if (capacidad <= 0) {
-            throw new IllegalArgumentException("La capacidad debe ser mayor que cero.");
-        }
-        this.listaMatriculas = new ArrayList<>(capacidad);
+    // Constructor sin capacidad fija
+    public Matriculas(int tamanoMaximo) {
+        this.listaMatriculas = new ArrayList<>();
     }
 
     public List<Matricula> getLista() {
-        return new ArrayList<>(listaMatriculas);
+        return new ArrayList<>(listaMatriculas); // Copia segura para evitar modificaciones externas
     }
 
     public List<Matricula> get(Alumno alumno) {
@@ -66,25 +56,34 @@ public class Matriculas {
         listaMatriculas.add(matricula);
     }
 
-    public Matricula buscar(String matricula) {
-        int index = listaMatriculas.indexOf(matricula);
-        return (index != -1) ? listaMatriculas.get(index) : null;
+    public Matricula buscar(int id) {
+        return listaMatriculas.stream()
+                .filter(matricula -> matricula.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
-    public void borrar(String matricula) {
+    public void borrar(int id) {
+        Matricula matricula = buscar(id);
         if (matricula == null) {
-            throw new NullPointerException("La matrícula no puede ser nula.");
-        }
-        if (!listaMatriculas.remove(matricula)) {
             throw new IllegalArgumentException("La matrícula no se encuentra en la lista.");
         }
+        listaMatriculas.remove(matricula);
     }
 
     private List<Matricula> copiaProfundaMatriculas() {
-        List<Matricula> copia = new ArrayList<>();
+        return listaMatriculas.stream()
+                .map(matricula -> new Matricula(new Alumno(), matricula)) // Copia profunda
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Lista de matrículas:\n");
         for (Matricula matricula : listaMatriculas) {
-            copia.add(new Matricula(matricula.getId()));
+            sb.append(matricula).append("\n");
         }
-        return copia;
+        return sb.toString().trim();
     }
 }
+

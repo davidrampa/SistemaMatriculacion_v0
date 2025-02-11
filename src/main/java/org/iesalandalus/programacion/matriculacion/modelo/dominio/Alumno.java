@@ -41,6 +41,10 @@ public class Alumno {
 
     }
 
+    public Alumno() {
+
+    }
+
     // Métodos de acceso y modificación
     public String getNombre() {
         return nombre;

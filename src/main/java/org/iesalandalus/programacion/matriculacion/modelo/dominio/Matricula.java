@@ -151,4 +151,8 @@ public class Matricula {
     public Alumno getAlumno() {
         return alumno;
     }
+
+    public Object getCicloFormativo() {
+        return null;
+    }
 }
