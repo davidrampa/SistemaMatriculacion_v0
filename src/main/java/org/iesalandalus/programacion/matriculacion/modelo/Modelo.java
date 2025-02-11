@@ -57,7 +57,7 @@ public class Modelo {
 
     public Matricula buscarMatricula(String id) {
         for (Matricula matricula : matriculas) {
-            if (matricula.getId().equals(id)) {
+            if (matricula.getId()) {
                 return matricula;
             }
         }

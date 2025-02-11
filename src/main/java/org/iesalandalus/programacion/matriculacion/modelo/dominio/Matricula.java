@@ -52,7 +52,7 @@ public class Matricula {
     }
 
     // Métodos de acceso y modificación
-    public int getId() {
+    public boolean getId() {
         return id;
     }
 
