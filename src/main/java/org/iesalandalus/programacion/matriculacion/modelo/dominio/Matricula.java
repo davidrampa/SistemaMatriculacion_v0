@@ -7,29 +7,29 @@ import java.util.List;
 import java.util.Objects;
 
 public class Matricula {
-    //Constantes
+    // Constantes
     public static final int MAX_HORAS_MATRICULA = 1000;
     public static final int MAX_ASIGNATURAS = 10;
     public static final int MAX_DIAS_RETRASO = 15;
     public static final int MAX_MESES_ANULACION = 6;
-    public static final String FORMATO_CURSO_ACADEMICO = "\\D{2}-\\d{2}";
+    public static final String FORMATO_CURSO_ACADEMICO = "\\d{2}-\\d{2}";
+
     private final Alumno alumno;
 
-    //Atributos
+    // Atributos
     private int id;
     private String cursoAcademico;
     private LocalDate fechaMatricula;
     private LocalDate fechaAnulacion;
     private List<Asignatura> asignaturas;
 
-    //Constructores
+    // Constructores
     public Matricula(int id, String cursoAcademico, LocalDate fechaMatricula, List<Asignatura> asignaturas, Alumno alumno) {
+        this.id = id;
         this.alumno = alumno;
-        this.fechaMatricula = fechaMatricula;
         setCursoAcademico(cursoAcademico);
         setFechaMatricula(fechaMatricula);
-        this.asignaturas = new ArrayList<>(asignaturas);
-        this.id = id;
+        setAsignaturas(asignaturas);
     }
 
     public Matricula(Alumno alumno, Matricula otra) {
@@ -38,31 +38,24 @@ public class Matricula {
     }
 
     public Matricula(int id) {
-        this.id = id; // Asigna el identificador proporcionado
-        this.alumno = new Alumno("Nombre Ficticio", "Apellido Ficticio", "12345678Z"); // Alumno ficticio
-        this.fechaMatricula = LocalDate.now(); // Fecha ficticia actual
-        this.asignaturas = new ArrayList<>(); // Sin asignaturas
-    }
-
-    public Matricula(Alumno alumno, LocalDate fechaMatricula, List<Asignatura> asignaturas, Alumno alumno1) {
-
-        this.alumno = alumno1;
+        this.id = id;
+        this.alumno = new Alumno("Nombre Ficticio", "Apellido Ficticio", "12345678Z");
+        this.fechaMatricula = LocalDate.now();
+        this.asignaturas = new ArrayList<>();
     }
 
     public Matricula(Alumno alumno, LocalDate fechaMatricula, List<Asignatura> asignaturas) {
-
+        this(0, "23-24", fechaMatricula, asignaturas, alumno);
     }
 
-    //Metodos de acceso y modificacion
-
-
+    // Métodos de acceso y modificación
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("El identificador debe ser un numero positivo.");
+            throw new IllegalArgumentException("El identificador debe ser un número positivo.");
         }
         this.id = id;
     }
@@ -73,7 +66,7 @@ public class Matricula {
 
     public void setCursoAcademico(String cursoAcademico) {
         if (cursoAcademico == null || !cursoAcademico.matches(FORMATO_CURSO_ACADEMICO)) {
-            throw new IllegalArgumentException("El curso academico debe tener el formato dd-dd. ");
+            throw new IllegalArgumentException("El curso académico debe tener el formato 'YY-YY' (ej. 23-24).");
         }
         this.cursoAcademico = cursoAcademico;
     }
@@ -83,8 +76,14 @@ public class Matricula {
     }
 
     public void setFechaMatricula(LocalDate fechaMatricula) {
-        if (fechaMatricula == null || ChronoUnit.DAYS.between(fechaMatricula, LocalDate.now()) > MAX_DIAS_RETRASO) {
-            throw new IllegalArgumentException("La fecha de matrículo no puede superar los "+ MAX_DIAS_RETRASO + "dias de retraso.");
+        if (fechaMatricula == null) {
+            throw new IllegalArgumentException("La fecha de matrícula no puede ser nula.");
+        }
+        if (fechaMatricula.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha de matrícula no puede estar en el futuro.");
+        }
+        if (ChronoUnit.DAYS.between(fechaMatricula, LocalDate.now()) > MAX_DIAS_RETRASO) {
+            System.out.println("⚠ Advertencia: La fecha de matrícula supera los " + MAX_DIAS_RETRASO + " días de retraso.");
         }
         this.fechaMatricula = fechaMatricula;
     }
@@ -95,7 +94,7 @@ public class Matricula {
 
     public void setFechaAnulacion(LocalDate fechaAnulacion) {
         if (fechaAnulacion != null && ChronoUnit.MONTHS.between(fechaMatricula, fechaAnulacion) > MAX_MESES_ANULACION) {
-           throw new IllegalArgumentException("La fecha de anulacion no puede superar los " + MAX_MESES_ANULACION + " meses desde la matricula.");
+            throw new IllegalArgumentException("La fecha de anulación no puede superar los " + MAX_MESES_ANULACION + " meses desde la matrícula.");
         }
         this.fechaAnulacion = fechaAnulacion;
     }
@@ -114,11 +113,9 @@ public class Matricula {
         this.asignaturas = new ArrayList<>(asignaturas);
     }
 
-    // Métodos adicionales
     private boolean superaMaximoNumeroHorasMatricula(List<Asignatura> asignaturas) {
         return asignaturas.stream().mapToInt(Asignatura::getHorasAnuales).sum() > MAX_HORAS_MATRICULA;
     }
-
 
     public String asignaturasMatricula() {
         StringBuilder sb = new StringBuilder();
@@ -127,8 +124,6 @@ public class Matricula {
         }
         return sb.toString().trim();
     }
-
-    // Métodos equals y hashCode
 
     @Override
     public boolean equals(Object o) {
@@ -143,8 +138,6 @@ public class Matricula {
         return Objects.hash(id);
     }
 
-    // Métodos imprimir y toString
-
     public String imprimir() {
         return String.format("Matrícula [%d - Curso: %s]", id, cursoAcademico);
     }
@@ -155,11 +148,7 @@ public class Matricula {
                 id, cursoAcademico, fechaMatricula, fechaAnulacion, asignaturasMatricula());
     }
 
-    public Object getAlumno() {
-        return null;
-    }
-
-    public Object getCicloFormativo() {
-        return null;
+    public Alumno getAlumno() {
+        return alumno;
     }
 }
