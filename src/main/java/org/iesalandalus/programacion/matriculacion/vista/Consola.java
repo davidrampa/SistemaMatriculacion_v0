@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 
 public class Consola {
 
@@ -87,6 +88,8 @@ public class Consola {
     }
 
     public static void mostrarCiclosFormativos(List<CicloFormativo> ciclos) {
+        // Ordenar la lista de ciclos formativos por código
+        Collections.sort(ciclos, (c1, c2) -> c1.getCodigo().compareTo(c2.getCodigo()));
         System.out.println("Ciclos formativos registrados:");
         for (CicloFormativo ciclo : ciclos) {
             System.out.println(ciclo);
@@ -117,6 +120,8 @@ public class Consola {
     }
 
     public static void mostrarAsignaturas(List<Asignatura> asignaturas) {
+        // Ordenar la lista de asignaturas por código
+        Collections.sort(asignaturas, (a1, a2) -> a1.getCodigo().compareTo(a2.getCodigo()));
         System.out.println("Asignaturas registradas:");
         for (Asignatura asignatura : asignaturas) {
             System.out.println(asignatura);
@@ -127,7 +132,7 @@ public class Consola {
         return listaAsignaturas.contains(asignatura);
     }
 
-    public static Asignatura[] elegirAsignaturasMatricula(Asignatura[] asignaturasDisponibles) {
+    public static List<Asignatura> elegirAsignaturasMatricula(List<Asignatura> asignaturasDisponibles) {
         List<Asignatura> asignaturasElegidas = new ArrayList<>();
         boolean continuar;
         do {
@@ -154,12 +159,12 @@ public class Consola {
             continuar = entrada.nextLine().equalsIgnoreCase("s");
         } while (continuar);
 
-        return asignaturasElegidas.toArray(new Asignatura[0]);
+        return asignaturasElegidas;
     }
 
     public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturasElegidas) {
         LocalDate fechaMatricula = leerFecha();
-        return new Matricula(alumno, fechaMatricula, List.of((Asignatura) asignaturasElegidas));
+        return new Matricula(alumno, fechaMatricula, asignaturasElegidas);
     }
 
     public static Matricula getMatriculaPorIdentificador() {
@@ -170,11 +175,9 @@ public class Consola {
 
     public static Asignatura getAsignaturaPorCodigo() {
         try {
-            // Solicitar el código de la asignatura al usuario
             System.out.print("Introduce el código de la asignatura: ");
             String codigo = entrada.nextLine().trim();
 
-            // Validar el formato del código (si aplica alguna regla)
             if (codigo.isEmpty()) {
                 throw new IllegalArgumentException("El código de la asignatura no puede estar vacío.");
             }
@@ -187,8 +190,21 @@ public class Consola {
     }
 
     public static void mostrarAlumnos(List<Alumno> alumnos) {
+        // Ordenar la lista de alumnos por nombre
+        Collections.sort(alumnos, (a1, a2) -> a1.getNombre().compareTo(a2.getNombre()));
+        System.out.println("Alumnos registrados:");
+        for (Alumno alumno : alumnos) {
+            System.out.println(alumno);
+        }
     }
 
     public static void mostrarMatriculas(List<Matricula> matriculas) {
+        // Ordenar la lista de matrículas por fecha
+        Collections.sort(matriculas, (m1, m2) -> Integer.parseInt(m1.getFecha().toString()));
+        System.out.println("Matrículas registradas:");
+        for (Matricula matricula : matriculas) {
+            System.out.println(matricula);
+        }
     }
 }
+
