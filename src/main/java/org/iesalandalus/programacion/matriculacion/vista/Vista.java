@@ -60,7 +60,7 @@ public class Vista {
 
     private void insertarMatricula() {
         Alumno alumno = Consola.getAlumnoPorDni();
-        List<Asignatura> asignaturasElegidas = new ArrayList<>(List.of(Consola.elegirAsignaturasMatricula(controlador.getAsignaturas())));
+        ArrayList<List<Asignatura>> asignaturasElegidas = new ArrayList<>(List.of(Consola.elegirAsignaturasMatricula(controlador.getAsignaturas())));
         Matricula matricula = Consola.leerMatricula(alumno, asignaturasElegidas);
         controlador.insertarMatricula(matricula);
         System.out.println("Matrícula insertada correctamente.");

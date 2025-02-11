@@ -94,7 +94,7 @@ public class Controlador {
         return modelo.getAlumnos();
     }
 
-    public Asignatura[] getAsignaturas() {
+    public List<Asignatura> getAsignaturas() {
         return modelo.getAsignaturas();
     }
 

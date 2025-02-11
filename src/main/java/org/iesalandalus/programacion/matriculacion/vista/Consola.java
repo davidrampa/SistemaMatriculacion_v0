@@ -162,7 +162,7 @@ public class Consola {
         return asignaturasElegidas;
     }
 
-    public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturasElegidas) {
+    public static Matricula leerMatricula(Alumno alumno, ArrayList<List<Asignatura>> asignaturasElegidas) {
         LocalDate fechaMatricula = leerFecha();
         return new Matricula(alumno, fechaMatricula, asignaturasElegidas);
     }

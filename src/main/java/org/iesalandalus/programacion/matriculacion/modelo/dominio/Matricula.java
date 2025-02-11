@@ -48,6 +48,9 @@ public class Matricula {
         this(0, "23-24", fechaMatricula, asignaturas, alumno);
     }
 
+    public Matricula(Alumno alumno, LocalDate fechaMatricula, ArrayList<List<Asignatura>> asignaturasElegidas) {
+    }
+
     // Métodos de acceso y modificación
     public int getId() {
         return id;
