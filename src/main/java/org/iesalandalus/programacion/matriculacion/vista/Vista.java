@@ -3,6 +3,9 @@ package org.iesalandalus.programacion.matriculacion.vista;
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Vista {
     private Controlador controlador;
@@ -29,6 +32,8 @@ public class Vista {
                 case BORRAR_ALUMNO -> borrarAlumno();
                 case LISTAR_ALUMNOS -> listarAlumnos();
                 case LISTAR_ASIGNATURAS -> listarAsignaturas();
+                case LISTAR_CICLOS -> listarCiclosFormativos();
+                case LISTAR_MATRICULAS -> listarMatriculas();
                 case SALIR -> salir = true;
                 default -> System.out.println("Opción no reconocida.");
             }
@@ -55,7 +60,7 @@ public class Vista {
 
     private void insertarMatricula() {
         Alumno alumno = Consola.getAlumnoPorDni();
-        List<Asignatura> asignaturasElegidas = List.of(Consola.elegirAsignaturasMatricula(controlador.getAsignaturas()));
+        List<Asignatura> asignaturasElegidas = new ArrayList<>(List.of(Consola.elegirAsignaturasMatricula(controlador.getAsignaturas())));
         Matricula matricula = Consola.leerMatricula(alumno, asignaturasElegidas);
         controlador.insertarMatricula(matricula);
         System.out.println("Matrícula insertada correctamente.");
@@ -66,7 +71,7 @@ public class Vista {
         Alumno alumno = Consola.getAlumnoPorDni();
         Alumno encontrado = controlador.buscarAlumno(alumno.getDni());
         if (encontrado != null) {
-            System.out.println("Alumno encontrado: " + encontrado);
+            System.out.println(STR."Alumno encontrado: \{encontrado}");
         } else {
             System.out.println("No se ha encontrado el alumno.");
         }
@@ -81,12 +86,30 @@ public class Vista {
 
     // Métodos para listar datos
     private void listarAlumnos() {
-        List<Alumno> alumnos = controlador.getAlumnos();
+        List<Alumno> alumnos = new ArrayList<>(controlador.getAlumnos());
+        // Ordenamos la lista de alumnos por nombre (o cualquier otro criterio)
+        Collections.sort(alumnos, Comparator.comparing(Alumno::getNombre));  // Asumiendo que la clase Alumno tiene un método getNombre
         Consola.mostrarAlumnos(alumnos);
     }
 
     private void listarAsignaturas() {
-        List<Asignatura> asignaturas = List.of(controlador.getAsignaturas());
+        ArrayList asignaturas = new ArrayList<>(List.of(controlador.getAsignaturas()));
+        // Ordenamos la lista de asignaturas por código (o cualquier otro criterio)
+        Collections.sort(asignaturas, Comparator.comparing(Asignatura::getCodigo));  // Asumiendo que la clase Asignatura tiene un método getCodigo
         Consola.mostrarAsignaturas(asignaturas);
+    }
+
+    private void listarCiclosFormativos() {
+        List<CicloFormativo> ciclosFormativos = new ArrayList<>(controlador.getCiclosFormativos());
+        // Ordenamos la lista de ciclos formativos por código (o cualquier otro criterio)
+        Collections.sort(ciclosFormativos, Comparator.comparing(CicloFormativo::getCodigo));  // Asumiendo que la clase CicloFormativo tiene un método getCodigo
+        Consola.mostrarCiclosFormativos(ciclosFormativos);
+    }
+
+    private void listarMatriculas() {
+        List<Matricula> matriculas = new ArrayList<>(controlador.getMatriculas());
+        // Ordenamos la lista de matrículas por fecha (o cualquier otro criterio)
+        Collections.sort(matriculas, Comparator.comparing(Matricula::getFecha));  // Asumiendo que la clase Matricula tiene un método getFecha
+        Consola.mostrarMatriculas(matriculas);
     }
 }

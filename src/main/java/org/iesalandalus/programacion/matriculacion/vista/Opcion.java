@@ -23,7 +23,8 @@ public enum Opcion {
     MOSTRAR_MATRICULAS_ALUMNO("Mostrar las matriculas de un alumno"),
     MOSTRAR_MATRICULAS_CICLO("Mostrar las matriculas de un ciclo"),
     MOSTRAR_MATRICULAS_CURSO("Mostrar las matriculas de un curso"),
-    INSERTAR_MATRICULA("Inserte su matricula");
+    INSERTAR_MATRICULA("Inserte su matricula"),
+    LISTAR_CICLOS("Lista los ciclos formativos");
 
     private final String mensaje;
 

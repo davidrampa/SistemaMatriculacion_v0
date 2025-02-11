@@ -86,7 +86,7 @@ public class Consola {
         return new CicloFormativo(codigo, nombre);
     }
 
-    public static void mostrarCiclosFormativos(CicloFormativo[] ciclos) {
+    public static void mostrarCiclosFormativos(List<CicloFormativo> ciclos) {
         System.out.println("Ciclos formativos registrados:");
         for (CicloFormativo ciclo : ciclos) {
             System.out.println(ciclo);
@@ -187,5 +187,8 @@ public class Consola {
     }
 
     public static void mostrarAlumnos(List<Alumno> alumnos) {
+    }
+
+    public static void mostrarMatriculas(List<Matricula> matriculas) {
     }
 }

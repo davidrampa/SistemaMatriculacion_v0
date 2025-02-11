@@ -159,4 +159,7 @@ public class Matricula {
     public ScopedValue<Object> map(Object o) {
         return null;
     }
+
+    public <U> U getFecha() {
+    }
 }
