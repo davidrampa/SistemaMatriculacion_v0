@@ -1,98 +1,106 @@
 package org.iesalandalus.programacion.matriculacion.modelo;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Modelo {
+    private final List<Alumno> alumnos = new ArrayList<>();
+    private final List<Asignatura> asignaturas = new ArrayList<>();
+    private final List<CicloFormativo> ciclosFormativos = new ArrayList<>();
+    private final List<Matricula> matriculas = new ArrayList<>();
 
-    private Alumnos alumnos;
-    private Asignaturas asignaturas;
-    private CiclosFormativos ciclosFormativos;
-    private Matriculas matriculas;
-
-
-    public void comenzar() {
-        alumnos = new Alumnos();
-        asignaturas = new Asignaturas();
-        ciclosFormativos = new CiclosFormativos();
-        matriculas = new Matriculas();
-        System.out.println("Modelo iniciado correctamente.");
-    }
-
-    public void terminar() {
-        System.out.println("Modelo finalizado correctamente.");
-    }
-
-    // Métodos insertar
+    // Métodos de inserción
     public void insertarAlumno(Alumno alumno) {
-        alumnos.insertar(alumno);
+        alumnos.add(alumno);
     }
 
     public void insertarAsignatura(Asignatura asignatura) {
-        asignaturas.insertar(asignatura);
+        asignaturas.add(asignatura);
     }
 
-    public void insertarCicloFormativo(CicloFormativo cicloFormativo) {
-        ciclosFormativos.insertar(cicloFormativo);
+    public void insertarCicloFormativo(CicloFormativo ciclo) {
+        ciclosFormativos.add(ciclo);
     }
 
     public void insertarMatricula(Matricula matricula) {
-        matriculas.insertar(matricula);
+        matriculas.add(matricula);
     }
 
-    // Métodos buscar
-    public Optional<Alumno> buscar(String dni) {
-        return alumnos.stream()
-                .filter(alumno -> false)
-                .filter();
+    // Métodos de búsqueda
+    public Alumno buscarAlumno(String dni) {
+        for (Alumno alumno : alumnos) {
+            if (alumno.getDni().equals(dni)) {
+                return alumno;
+            }
+        }
+        return null;
     }
 
     public Asignatura buscarAsignatura(String codigo) {
-        return asignaturas.buscar(codigo).map(Asignatura::new).orElse(null);
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(codigo)) {
+                return asignatura;
+            }
+        }
+        return null;
     }
 
     public CicloFormativo buscarCicloFormativo(String codigo) {
-        return ciclosFormativos.buscar(codigo).map().orElse(null);
+        for (CicloFormativo ciclo : ciclosFormativos) {
+            if (ciclo.getCodigo().equals(codigo)) {
+                return ciclo;
+            }
+        }
+        return null;
     }
 
     public Matricula buscarMatricula(String id) {
-        return matriculas.buscar(Integer.parseInt(id)).map(m -> new Matricula(m.getId())).orElse(null);
+        for (Matricula matricula : matriculas) {
+            if (matricula.getId().equals(id)) {
+                return matricula;
+            }
+        }
+        return null;
     }
 
-    // Métodos borrar
+    // Métodos de borrado
     public void borrarAlumno(String dni) {
-        alumnos.borrar(dni);
+        alumnos.removeIf(alumno -> alumno.getDni().equals(dni));
     }
 
     public void borrarAsignatura(String codigo) {
-        asignaturas.borrar(codigo);
+        asignaturas.removeIf(asignatura -> asignatura.getCodigo().equals(codigo));
     }
 
     public void borrarCicloFormativo(String codigo) {
-        ciclosFormativos.borrar(codigo);
+        ciclosFormativos.removeIf(ciclo -> ciclo.getCodigo().equals(codigo));
     }
 
     public void borrarMatricula(String id) {
-        matriculas.borrar(Integer.parseInt(id));
+
     }
 
-    // Métodos get (devuelven copias para evitar modificaciones externas)
+    // Métodos de obtención de listas
     public List<Alumno> getAlumnos() {
-        return alumnos.getLista().stream().map(Alumno::new).toList();
+        return alumnos;
     }
 
     public List<Asignatura> getAsignaturas() {
-        return asignaturas.getLista().stream().map(Asignatura::new).toList();
+        return asignaturas;
     }
 
     public List<CicloFormativo> getCiclosFormativos() {
-        return ciclosFormativos.getLista().stream().map(CicloFormativo::new).toList();
+        return ciclosFormativos;
     }
 
     public List<Matricula> getMatriculas() {
-        return matriculas.getLista().stream().map(m -> new Matricula(m.getId())).toList();
+        return matriculas;
+    }
+
+    public void comenzar() {
+    }
+
+    public void terminar() {
     }
 }

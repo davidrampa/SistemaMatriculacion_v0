@@ -9,8 +9,9 @@ import org.iesalandalus.programacion.matriculacion.vista.Vista;
 
 import java.util.List;
 
-public class Controlador { private Modelo modelo;
-    private Vista vista;
+public class Controlador {
+    private final Modelo modelo;
+    private final Vista vista;
 
     // Constructor con parámetros
     public Controlador(Modelo modelo, Vista vista) {
@@ -59,8 +60,8 @@ public class Controlador { private Modelo modelo;
         return modelo.buscarAlumno(dni);
     }
 
-    public CicloFormativo buscarAsignatura(String codigo) {
-        return modelo.buscarAsignaturas(codigo);
+    public Asignatura buscarAsignatura(String codigo) {
+        return modelo.buscarAsignatura(codigo);
     }
 
     public CicloFormativo buscarCicloFormativo(String codigo) {
