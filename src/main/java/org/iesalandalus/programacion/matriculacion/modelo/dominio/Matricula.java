@@ -48,11 +48,12 @@ public class Matricula {
         this(0, "23-24", fechaMatricula, asignaturas, alumno);
     }
 
-    public Matricula(Alumno alumno, LocalDate fechaMatricula, ArrayList<List<Asignatura>> asignaturasElegidas) {
+    public Matricula(Alumno alumno, LocalDate fechaMatricula, ArrayList<List<Asignatura>> asignaturasElegidas, Alumno alumno1) {
+        this.alumno = alumno1;
     }
 
     // Métodos de acceso y modificación
-    public boolean getId() {
+    public int getId() {
         return id;
     }
 
@@ -164,5 +165,6 @@ public class Matricula {
     }
 
     public <U> U getFecha() {
+        return null;
     }
 }
