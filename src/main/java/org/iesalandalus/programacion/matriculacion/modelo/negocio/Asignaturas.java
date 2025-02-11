@@ -2,26 +2,20 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Asignaturas {
     private List<Asignatura> listaAsignaturas;
-    private int capacidad;
 
-
-    public Asignaturas(int capacidad) {
-        if (capacidad <= 0) {
-            throw new IllegalArgumentException("La capacidad debe ser mayor que cero.");
-        }
-        this.capacidad = capacidad;
-        listaAsignaturas = new ArrayList<>(capacidad);
+    public Asignaturas() {
+        listaAsignaturas = new ArrayList<>();
     }
 
     public List<Asignatura> getLista() {
-        return new ArrayList<>(listaAsignaturas);
+        return new ArrayList<>(listaAsignaturas); // Copia segura para evitar modificaciones externas
     }
+
     public void insertar(Asignatura asignatura) {
         if (asignatura == null) {
             throw new NullPointerException("La asignatura no puede ser nula.");
@@ -32,25 +26,30 @@ public class Asignaturas {
         listaAsignaturas.add(asignatura);
     }
 
-    public Asignatura buscar(String asignatura) {
-        int indice = listaAsignaturas.indexOf(asignatura);
-        return (indice != -1) ? listaAsignaturas.get(indice) : null;
+    public Asignatura buscar(String nombre) {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la asignatura no puede estar vacío.");
+        }
+        return listaAsignaturas.stream()
+                .filter(asignatura -> asignatura.getNombre().equalsIgnoreCase(nombre))
+                .findFirst()
+                .orElse(null);
     }
 
-    public void borrar(String asignatura) {
+    public void borrar(String nombre) {
+        Asignatura asignatura = buscar(nombre);
         if (asignatura == null) {
-            throw new NullPointerException("La asignatura no puede ser nula.");
-        }
-        if (!listaAsignaturas.remove(asignatura)) {
             throw new IllegalArgumentException("La asignatura no se encuentra en la lista.");
         }
+        listaAsignaturas.remove(asignatura);
     }
 
-    private List<Asignatura> copiaProfundaAsignaturas() {
-        List<Asignatura> copia = new ArrayList<>(listaAsignaturas.size());
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Lista de asignaturas:\n");
         for (Asignatura asignatura : listaAsignaturas) {
-            copia.add(new Asignatura(asignatura));
+            sb.append(asignatura).append("\n");
         }
-        return copia;
+        return sb.toString().trim();
     }
 }
