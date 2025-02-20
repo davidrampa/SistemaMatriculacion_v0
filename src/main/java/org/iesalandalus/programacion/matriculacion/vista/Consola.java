@@ -119,7 +119,7 @@ public class Consola {
         return new Asignatura(codigo, nombre);
     }
 
-    public static void mostrarAsignaturas(List<Asignatura> asignaturas) {
+    public static void mostrarAsignaturas(ArrayList<List<Asignatura>> asignaturas) {
         // Ordenar la lista de asignaturas por código
         Collections.sort(asignaturas, (a1, a2) -> a1.getCodigo().compareTo(a2.getCodigo()));
         System.out.println("Asignaturas registradas:");
@@ -162,7 +162,7 @@ public class Consola {
         return asignaturasElegidas;
     }
 
-    public static Matricula leerMatricula(Alumno alumno, ArrayList<List<Asignatura>> asignaturasElegidas) {
+    public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturasElegidas) {
         LocalDate fechaMatricula = leerFecha();
         return new Matricula(alumno, fechaMatricula, asignaturasElegidas);
     }
@@ -205,6 +205,14 @@ public class Consola {
         for (Matricula matricula : matriculas) {
             System.out.println(matricula);
         }
+    }
+
+    public static Matricula leerMatriculaBuscar() {
+        return null;
+    }
+
+    public static CicloFormativo getCicloPorCodigo() {
+        return null;
     }
 }
 

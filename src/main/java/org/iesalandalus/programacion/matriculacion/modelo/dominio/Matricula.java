@@ -52,6 +52,11 @@ public class Matricula {
         this.alumno = alumno1;
     }
 
+    public Matricula(Alumno alumno, LocalDate fechaMatricula, ArrayList<List<Asignatura>> asignaturasElegidas, Alumno alumno1) {
+
+        this.alumno = alumno1;
+    }
+
     // Métodos de acceso y modificación
     public int getId() {
         return id;

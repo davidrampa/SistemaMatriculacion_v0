@@ -105,5 +105,17 @@ public class Controlador {
     public List<Matricula> getMatriculas() {
         return modelo.getMatriculas();
     }
+
+    public List<Matricula> getMatriculasPorAlumno(Alumno alumno) {
+        return null;
+    }
+
+    public List<Matricula> getMatriculasPorCiclo(CicloFormativo ciclo) {
+        return null;
+    }
+
+    public List<Matricula> getMatriculasPorCurso(int curso) {
+        return null;
+    }
 }
 

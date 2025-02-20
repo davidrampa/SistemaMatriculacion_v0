@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Asignatura {
@@ -41,7 +42,7 @@ public class Asignatura {
 
     // Métodos de acceso y modificación
 
-    public String getCodigo() {
+    public static String getCodigo() {
         return codigo;
     }
 
@@ -148,6 +149,10 @@ public class Asignatura {
     }
 
     public ScopedValue<Object> map(Object o) {
+        return null;
+    }
+
+    public static <U> U getCodigo(List<Asignatura> asignaturas) {
         return null;
     }
 }
