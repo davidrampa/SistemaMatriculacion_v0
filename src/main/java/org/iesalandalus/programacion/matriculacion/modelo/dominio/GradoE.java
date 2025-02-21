@@ -1,14 +1,12 @@
 package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-public class GradoD extends Grado {
+public class GradoE extends Grado {
         private String nombre;
-        private int numAnos;
+        private final int numAnos = 1; // Siempre será 1
 
         // Constructor
-        public GradoD(String nombre) {
-            super();
+        public GradoE(String modalidad) {
             setNombre(nombre);
-            setNumAnos(numAnos);
         }
 
         // Getter para el nombre
@@ -24,23 +22,15 @@ public class GradoD extends Grado {
             this.nombre = nombre;
         }
 
-        // Getter para el número de años
+        // Getter para el número de años (no hay setter porque es fijo)
         public int getNumAnos() {
             return numAnos;
-        }
-
-        // Setter para el número de años con validación
-        public void setNumAnos(int numAnos) {
-            if (numAnos != 2 && numAnos != 3) {
-                throw new IllegalArgumentException("El número de años debe ser 2 o 3.");
-            }
-            this.numAnos = numAnos;
         }
 
         // Metodo toString para representar la información del grado
         @Override
         public String toString() {
-            return String.format("%s (%d años)", nombre, numAnos);
+            return String.format("%s (%d año)", nombre, numAnos);
         }
 
 }

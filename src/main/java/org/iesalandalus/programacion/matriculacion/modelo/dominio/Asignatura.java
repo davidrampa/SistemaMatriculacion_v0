@@ -42,7 +42,7 @@ public class Asignatura {
 
     // Métodos de acceso y modificación
 
-    public static String getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 

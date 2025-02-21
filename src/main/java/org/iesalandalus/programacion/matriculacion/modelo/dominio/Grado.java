@@ -11,6 +11,14 @@ public class Grado {
         setNumAnios(numAnos);
     }
 
+    public Grado() {
+
+    }
+
+    public static Grado[] values() {
+        return null;
+    }
+
     // Metodo getter para obtener el nombre del grado
     public String getNombre() {
         return nombre;

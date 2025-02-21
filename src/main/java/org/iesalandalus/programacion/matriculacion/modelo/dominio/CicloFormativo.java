@@ -27,6 +27,18 @@ public class CicloFormativo {
     public CicloFormativo(String codigo, String nombre) {
     }
 
+    public CicloFormativo(String codigo, String nombreFicticio, GradoD presencial) {
+
+    }
+
+    public CicloFormativo(String codigo, String nombre, Grado grado) {
+
+    }
+
+    public CicloFormativo(String codigo, String nombre, GradoE grado) {
+
+    }
+
     public String getCodigo(){
         return codigo;
     }
